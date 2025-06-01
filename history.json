@@ -1,0 +1,79 @@
+[
+    {
+        "user": "user1",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "user2",
+        "book_id": "B002",
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "action": "Mượn",
+        "date": "2025-05-25"
+    },
+    {
+        "user": "user1",
+        "book_id": "B002",
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "action": "Trả",
+        "date": "2025-05-29"
+    },
+    {
+        "user": "admin",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "admin",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-05-31"
+    }
+]
