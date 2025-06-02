@@ -13,7 +13,11 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
-
+USERS_FILE = resource_path("users.json")
+HISTORY_FILE = resource_path("history.json")
+BORROW_HISTORY_FILE = resource_path("borrow_history.json")  
+BOOKS_FILE = resource_path("books.json")
+BORROW_FILE = resource_path("borrow.json")
 # ----- Load & Save -----
 def load_users():
     if not os.path.exists(USERS_FILE):
