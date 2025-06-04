@@ -25,24 +25,24 @@ def save_data(file, data):
     with open(file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-def tim_sach_tu_openlibrary(tieu_de):
-    try:
-        url = f"https://openlibrary.org/search.json?title={tieu_de}"
-        response = requests.get(url, timeout=5)
-        response.raise_for_status()
-        data = response.json()
-        docs = data.get("docs", [])
-        if docs:
-            sach = docs[0]
-            return {
-                "tieu_de": sach.get("title", "Không rõ"),
-                "tac_gia": ", ".join(sach.get("author_name", ["Không rõ"])),
-                "nam_xb": sach.get("first_publish_year", "Không rõ")
-            }
-        return None
-    except requests.RequestException as e:
-        messagebox.showerror("Lỗi", f"Không thể kết nối tới Open Library: {e}")
-        return None
+#def tim_sach_tu_openlibrary(tieu_de):
+    #try:
+        #url = f"https://openlibrary.org/search.json?title={tieu_de}"
+        #response = requests.get(url, timeout=5)
+        #response.raise_for_status()
+        #data = response.json()
+        #docs = data.get("docs", [])
+        #if docs:
+            #sach = docs[0]
+            #return {
+                #"tieu_de": sach.get("title", "Không rõ"),
+                #"tac_gia": ", ".join(sach.get("author_name", ["Không rõ"])),
+                #"nam_xb": sach.get("first_publish_year", "Không rõ")
+            #}
+        #return None
+    #except requests.RequestException as e:
+        #messagebox.showerror("Lỗi", f"Không thể kết nối tới Open Library: {e}")
+        #return None
 
 # Xem danh sách
 def view_books(tree):
@@ -78,21 +78,21 @@ def add_book(tree):
     entry_quantity.insert(0, "1")
     entry_quantity.pack()
 
-    def tu_dong_dien():
-        tieu_de = entry_title.get().strip()
-        if not tieu_de:
-            messagebox.showwarning("Thiếu thông tin", "Vui lòng nhập tên sách trước khi tìm.")
-            return
-        thong_tin = tim_sach_tu_openlibrary(tieu_de)
-        if thong_tin:
-            entry_title.delete(0, tk.END)
-            entry_title.insert(0, thong_tin["tieu_de"])
-            entry_author.delete(0, tk.END)
-            entry_author.insert(0, thong_tin["tac_gia"])
-            entry_year.delete(0, tk.END)
-            entry_year.insert(0, thong_tin["nam_xb"])
-        else:
-            messagebox.showinfo("Không tìm thấy", "Không tìm thấy thông tin cho sách này.")
+    #def tu_dong_dien():
+        #tieu_de = entry_title.get().strip()
+        #if not tieu_de:
+            #messagebox.showwarning("Thiếu thông tin", "Vui lòng nhập tên sách trước khi tìm.")
+            #return
+        #thong_tin = tim_sach_tu_openlibrary(tieu_de)
+        #if thong_tin:
+            #entry_title.delete(0, tk.END)
+            #entry_title.insert(0, thong_tin["tieu_de"])
+            #entry_author.delete(0, tk.END)
+            #entry_author.insert(0, thong_tin["tac_gia"])
+            #entry_year.delete(0, tk.END)
+            #entry_year.insert(0, thong_tin["nam_xb"])
+        #else:
+            #messagebox.showinfo("Không tìm thấy", "Không tìm thấy thông tin cho sách này.")
 
     def save():
         id_val = entry_id.get().strip()
@@ -128,7 +128,7 @@ def add_book(tree):
         view_books(tree)
         messagebox.showinfo("Thành công", "Đã thêm sách.")
 
-    tk.Button(top, text="Tự động điền từ Open Library", command=tu_dong_dien).pack(pady=10)
+    #tk.Button(top, text="Tự động điền từ Open Library", command=tu_dong_dien).pack(pady=10)
     tk.Button(top, text="Lưu", command=save).pack(pady=10)
 
 # Xóa sách
