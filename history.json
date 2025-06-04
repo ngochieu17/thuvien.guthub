@@ -75,5 +75,47 @@
         "title": "Lập trình Python",
         "action": "Trả",
         "date": "2025-05-31"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-06-02"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-06-02"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-06-04"
+    },
+    {
+        "user": "HIEU",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-06-04"
+    },
+    {
+        "user": "hieu",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Mượn",
+        "date": "2025-06-04"
+    },
+    {
+        "user": "hieu",
+        "book_id": "B001",
+        "title": "Lập trình Python",
+        "action": "Trả",
+        "date": "2025-06-04"
     }
 ]

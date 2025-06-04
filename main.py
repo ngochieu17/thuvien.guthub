@@ -6,6 +6,7 @@ import os
 import sys
 
 USERS_FILE = "users.json"
+BOOKS_FILE = "books.json"
 # ----- Hàm lấy đường dẫn ảnh khi chuyển sang exe -----
 def resource_path(relative_path):
     """Lấy đường dẫn tuyệt đối tới file khi chạy file exe hoặc script"""

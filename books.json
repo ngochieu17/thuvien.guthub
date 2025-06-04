@@ -7,10 +7,17 @@
         "quantity": 1
     },
     {
-        "id": "B003",
-        "title": "Cơ sở dữ liệu",
-        "author": "Lê Văn C",
-        "year": "2020",
+        "id": "B005",
+        "title": "Hệ cơ sở dữ liệu",
+        "author": "Phạm B",
+        "year": "2000",
+        "quantity": 1
+    },
+    {
+        "id": "A001",
+        "title": "ABC",
+        "author": "Phạm Văn C",
+        "year": "2000",
         "quantity": 1
     }
 ]

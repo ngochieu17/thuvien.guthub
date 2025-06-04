@@ -1,0 +1,16 @@
+[
+    {
+        "id": "B001",
+        "title": "Lập trình Python",
+        "author": "Nguyễn Văn A",
+        "year": "2021",
+        "quantity": 1
+    },
+    {
+        "id": "B003",
+        "title": "Cơ sở dữ liệu",
+        "author": "Lê Văn C",
+        "year": "2020",
+        "quantity": 1
+    }
+]
