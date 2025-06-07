@@ -5,13 +5,8 @@
         "role": "admin"
     },
     {
-        "username": "user1",
-        "password": "user123",
-        "role": "user"
-    },
-    {
         "username": "HIEU",
-        "password": "123",
+        "password": "1234",
         "role": "user"
     },
     {
@@ -20,12 +15,22 @@
         "role": "admin"
     },
     {
-        "username": "admin2",
-        "password": "123",
-        "role": "users"
+        "username": "ABC",
+        "password": "1234",
+        "role": "user"
     },
     {
-        "username": "hieu",
+        "username": "nam",
+        "password": "nam12345",
+        "role": "user"
+    },
+    {
+        "username": "hieungoc",
+        "password": "123456",
+        "role": "user"
+    },
+    {
+        "username": "hdjejjdn",
         "password": "123456",
         "role": "user"
     }

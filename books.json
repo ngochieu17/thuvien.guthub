@@ -2,7 +2,7 @@
     {
         "id": "B001",
         "title": "Lập trình Python",
-        "author": "Nguyễn Văn A",
+        "author": "Nguyễn Văn An",
         "year": "2021",
         "quantity": 1
     },
@@ -14,10 +14,17 @@
         "quantity": 1
     },
     {
-        "id": "A001",
-        "title": "ABC",
-        "author": "Phạm Văn C",
-        "year": "2000",
+        "id": "B00000",
+        "title": "lan và điệp",
+        "author": "nam cao",
+        "year": "2025",
+        "quantity": 1
+    },
+    {
+        "id": "B01202",
+        "title": "Tấm cám",
+        "author": "nguyen nam",
+        "year": "2023",
         "quantity": 1
     }
 ]

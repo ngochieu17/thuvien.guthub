@@ -4,6 +4,7 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import json
 import os
+import re
 
 USERS_FILE = "users.json"
 
@@ -45,6 +46,13 @@ def register():
 
         if not username or not password:
             messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ thông tin.")
+            return
+        if len(username) < 6 or len(username) > 50:
+            messagebox.showwarning("Tên đăng kí người dùng không hợp lệ", "Tên người dùng phải từ 6 đến 50 ký tự.")
+            return
+        if not re.match(r'^[a-zA-Z][a-zA-Z0-9_]{5,49}$', username):
+            messagebox.showwarning("Tên đăng nhập không hợp lệ",
+            "Tên đăng nhập chỉ được chứa chữ cái, số, dấu gạch dưới (_), và phải bắt đầu bằng chữ.")
             return
         if len(password) < 6:
             messagebox.showwarning("Mật khẩu yếu", "Mật khẩu phải có ít nhất 6 ký tự.")

@@ -6,7 +6,11 @@ import datetime
 import requests
 import sys
 import subprocess
+import re
+
 from login_module import show_login_window
+from main import quan_ly_nguoi_dung
+
 
 
 BOOKS_FILE = "books.json"
@@ -50,6 +54,8 @@ def view_books(tree):
     tree.delete(*tree.get_children())
     for b in books:
         tree.insert("", "end", values=(b["id"], b["title"], b["author"], b["year"], b.get("quantity", 0)))
+def is_valid_book_id(book_id):
+    return re.fullmatch(r'[B]\d{5}', book_id) is not None
 
 # Thêm sách
 def add_book(tree):
@@ -57,7 +63,7 @@ def add_book(tree):
     top.title("Thêm sách")
     top.geometry("300x300")
 
-    tk.Label(top, text="ID").pack(pady=5)
+    tk.Label(top, text="ID.\nĐịnh dạng: B + 5 chữ số (VD: B00001)").pack(pady=5)
     entry_id = tk.Entry(top)
     entry_id.pack()
 
@@ -99,6 +105,31 @@ def add_book(tree):
         title = entry_title.get().strip()
         author = entry_author.get().strip()
         year = entry_year.get().strip()
+        # Tập ký tự bao gồm a-z, A-Z, số 0-9, khoảng trắng, các dấu . , ' - và các ký tự tiếng Việt có dấu
+        pattern_vietnamese = r"[A-Za-z0-9\s\.,'\-ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯàáâãèéêìíòóôõùúăđĩũơưẠ-ỹ]+"
+        #Kiểm tra định dạng ID:
+        if not re.fullmatch(r'[B]\d{5}', id_val):
+            messagebox.showerror("Lỗi", "Mã sách không hợp lệ.\nĐịnh dạng: B + 5 chữ số (VD: B00001)")
+            return
+        # Kiểm tra tên sách hợp lệ, chiều dài 5-50 ký tự
+        if not (5 <= len(title) <= 50):
+            messagebox.showerror("Lỗi", "Tên sách phải có từ 5 đến 50 ký tự.")
+            return
+        if not re.fullmatch(pattern_vietnamese,title):
+            messagebox.showerror("Lỗi", "Tên sách chỉ được chứa chữ cái, số, khoảng trắng và các dấu . , ' -")
+            return
+        # Kiểm tra tên tác giả hợp lệ, chiều dài 5-50 ký tự
+        if not (5 <= len(author) <= 50):
+            messagebox.showerror("Lỗi", "Tên tác giả phải có từ 5 đến 50 ký tự.")
+            return
+        if not re.fullmatch(pattern_vietnamese, author):
+            messagebox.showerror("Lỗi", "Tên tác giả chỉ được chứa chữ cái, số, khoảng trắng và các dấu . , ' -")
+            return
+        # Kiểm tra năm hợp lệ (phải là số nguyên, không quá 2025)
+        if not year.isdigit() or int(year) > 2025:
+            messagebox.showerror("Lỗi", "Năm phải là số nguyên và không được lớn hơn 2025.")
+            return
+
         try:
             quantity = int(entry_quantity.get())
             if quantity < 0:
@@ -106,9 +137,14 @@ def add_book(tree):
         except ValueError:
             messagebox.showerror("Lỗi", "Số lượng phải là số nguyên không âm.")
             return
-
+        
         if not all([id_val, title, author, year]):
             messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ các trường.")
+            return
+        books = load_data(BOOKS_FILE)
+        
+        if any(book["title"].lower()== title.lower() for book in books):
+            messagebox.showerror("Lỗi", "Tên sách đã tồn tại.")
             return
 
         books = load_data(BOOKS_FILE)
@@ -127,6 +163,7 @@ def add_book(tree):
         top.destroy()
         view_books(tree)
         messagebox.showinfo("Thành công", "Đã thêm sách.")
+        show_launch_app()  
 
     #tk.Button(top, text="Tự động điền từ Open Library", command=tu_dong_dien).pack(pady=10)
     tk.Button(top, text="Lưu", command=save).pack(pady=10)
@@ -185,34 +222,23 @@ def edit_book(tree):
     entry_quantity = tk.Entry(top)
     entry_quantity.insert(0, str(book.get("quantity", 0)))
     entry_quantity.pack()
-
-    def save():
-        title = entry_title.get().strip()
-        author = entry_author.get().strip()
-        year = entry_year.get().strip()
+    def save_edit():
+        # Lấy dữ liệu mới
+        book["title"] = entry_title.get()
+        book["author"] = entry_author.get()
+        book["year"] = entry_year.get()
         try:
-            quantity = int(entry_quantity.get())
-            if quantity < 0:
-                raise ValueError("Số lượng không hợp lệ")
+            book["quantity"] = int(entry_quantity.get())
         except ValueError:
-            messagebox.showerror("Lỗi", "Số lượng phải là số nguyên không âm.")
+            messagebox.showerror("Lỗi", "Số lượng phải là số nguyên.")
             return
-
-        if not all([title, author, year]):
-            messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ các trường.")
-            return
-
-        book["title"] = title
-        book["author"] = author
-        book["year"] = year
-        book["quantity"] = quantity
-        save_data(BOOKS_FILE, books)
+        save_data(BOOKS_FILE,books)
+        tree.item(selected, values=(book["id"], book["title"], book["author"], book["year"], book["quantity"]))
+        messagebox.showinfo("Thành công", "Sửa sách thành công.")
         top.destroy()
-        view_books(tree)
-        messagebox.showinfo("Thành công", "Đã cập nhật sách.")
+    tk.Button(top, text="Lưu", command=save_edit).pack(pady=10)
 
-    tk.Button(top, text="Lưu", command=save).pack(pady=10)
-
+    
 # Mượn sách
 def borrow_book(tree, user):
     selected = tree.selection()
@@ -413,6 +439,7 @@ def thong_ke_lich_su_muon_tra():
 def logout(root):
     if messagebox.askyesno("Đăng xuất", "Bạn có muốn đăng xuất?"):
         root.destroy()
+        return False
       
 
 
@@ -452,6 +479,9 @@ def launch_app(username, role):
         tk.Button(frame, text="🔍 Tìm kiếm", command=lambda: search_books(tree)).grid(row=0, column=5, padx=5)
         tk.Button(frame, text="🔍 Tìm người dùng mượn", command=search_borrowers).grid(row=0, column=6, padx=5)
         tk.Button(frame, text="📋 Lịch sử mượn trả", command=thong_ke_lich_su_muon_tra).grid(row=0, column=7, padx=5)
+        btn_ql_user = tk.Button(frame, text="Quản lý người dùng", command=quan_ly_nguoi_dung)
+        btn_ql_user.grid(pady=10)
+
     tk.Button(root, text="🔒 Đăng xuất", font=("Arial", 12, "bold"), fg="red",
               command=lambda: logout(root)).pack(pady=20)
     root.mainloop()
