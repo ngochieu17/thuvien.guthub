@@ -63,7 +63,7 @@ def add_book(tree):
     top.title("Thêm sách")
     top.geometry("300x300")
 
-    tk.Label(top, text="ID.\nĐịnh dạng: B + 5 chữ số (VD: B00001)").pack(pady=5)
+    tk.Label(top, text="ID.\nĐịnh dạng: B + 3 chữ số (VD: B001)").pack(pady=5)
     entry_id = tk.Entry(top)
     entry_id.pack()
 
@@ -108,8 +108,8 @@ def add_book(tree):
         # Tập ký tự bao gồm a-z, A-Z, số 0-9, khoảng trắng, các dấu . , ' - và các ký tự tiếng Việt có dấu
         pattern_vietnamese = r"[A-Za-z0-9\s\.,'\-ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯàáâãèéêìíòóôõùúăđĩũơưẠ-ỹ]+"
         #Kiểm tra định dạng ID:
-        if not re.fullmatch(r'[B]\d{5}', id_val):
-            messagebox.showerror("Lỗi", "Mã sách không hợp lệ.\nĐịnh dạng: B + 5 chữ số (VD: B00001)")
+        if not re.fullmatch(r'[B]\d{3}', id_val):
+            messagebox.showerror("Lỗi", "Mã sách không hợp lệ.\nĐịnh dạng: B + 3 chữ số (VD: B001)")
             return
         # Kiểm tra tên sách hợp lệ, chiều dài 5-50 ký tự
         if not (5 <= len(title) <= 50):
@@ -142,7 +142,7 @@ def add_book(tree):
             messagebox.showwarning("Thiếu thông tin", "Vui lòng điền đầy đủ các trường.")
             return
         books = load_data(BOOKS_FILE)
-        
+
         if any(book["title"].lower()== title.lower() for book in books):
             messagebox.showerror("Lỗi", "Tên sách đã tồn tại.")
             return
