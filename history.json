@@ -119,20 +119,6 @@
         "date": "2025-06-04"
     },
     {
-        "user": "nam",
-        "book_id": "B01202",
-        "title": "Tấm cám",
-        "action": "Mượn",
-        "date": "2025-06-07"
-    },
-    {
-        "user": "nam",
-        "book_id": "B01202",
-        "title": "Tấm cám",
-        "action": "Trả",
-        "date": "2025-06-07"
-    },
-    {
         "user": "HIEU",
         "book_id": "B001",
         "title": "Lập trình Python",

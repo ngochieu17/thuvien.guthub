@@ -5,32 +5,12 @@
         "role": "admin"
     },
     {
-        "username": "HIEU",
-        "password": "1234",
-        "role": "user"
-    },
-    {
-        "username": "ADMIN1",
-        "password": "123",
-        "role": "admin"
-    },
-    {
-        "username": "ABC",
-        "password": "1234",
-        "role": "user"
-    },
-    {
         "username": "nam",
         "password": "nam12345",
         "role": "user"
     },
     {
         "username": "hieungoc",
-        "password": "123456",
-        "role": "user"
-    },
-    {
-        "username": "hdjejjdn",
         "password": "123456",
         "role": "user"
     }
